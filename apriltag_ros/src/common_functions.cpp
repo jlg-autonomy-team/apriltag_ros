@@ -173,7 +173,7 @@ TagDetector::~TagDetector() {
     }
 }
 
-std::map<int, StandaloneTagDescription> TagDetector::parse_standalone_tags_from_yaml(const std::string& yaml_string) 
+std::map<int, StandaloneTagDescription> TagDetector::parse_standalone_tags_from_yaml(const std::string& yaml_string)
 {
     // Get the root node of the YAML document.
     YAML::Node root = YAML::LoadFile(yaml_string);
@@ -206,7 +206,7 @@ std::map<int, StandaloneTagDescription> TagDetector::parse_standalone_tags_from_
     return standalone_tag_descriptions;
 }
 
-std::vector<TagBundleDescription> TagDetector::parse_tag_bundles_from_yaml(const std::string& yaml_string) 
+std::vector<TagBundleDescription> TagDetector::parse_tag_bundles_from_yaml(const std::string& yaml_string)
 {
     // Get the root node of the YAML document.
     YAML::Node root = YAML::LoadFile(yaml_string);
@@ -253,7 +253,7 @@ std::vector<TagBundleDescription> TagDetector::parse_tag_bundles_from_yaml(const
                             R_oi(1,0), R_oi(1,1), R_oi(1,2), y,
                             R_oi(2,0), R_oi(2,1), R_oi(2,2), z,
                             0,         0,         0,         1);
-    
+
             // Add the tag member to the bundle description.
             tag_bundle_description.addMemberTag(id, size, T_oi);
         }
@@ -463,7 +463,7 @@ apriltag_ros_interfaces::msg::AprilTagDetectionArray TagDetector::detectTags (
             tag_transform.transform.rotation.z = pose.pose.orientation.z;
             tag_transform.transform.rotation.w = pose.pose.orientation.w;
 
-            tag_transform.child_frame_id = std::to_string(tag_detection_array.detections[i].id[0]);
+            tag_transform.child_frame_id = detection_names[i];
 
             tag_transform.header = pose.header;
 
@@ -687,4 +687,3 @@ bool TagDetector::findStandaloneTagDescription (
   descriptionContainer = &(description_itr->second);
   return true;
 }
-
